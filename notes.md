@@ -20,3 +20,11 @@ CSV (or similar) or SQLite database
 ## Interface
 
 start with command line, convert to web app later?
+
+## Business Logic
+
+- function to show percent of budget used
+- function to show budget remaining (either in value or percentage)
+- function to calculate average burn rate
+
+- function to show actual spend over timeline -- compare with plan
