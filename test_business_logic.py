@@ -26,3 +26,8 @@ def test_get_remaining_budget():
         business_logic.get_remaining_budget(120000, 100000, percent=True)
         == -0.2
     )
+
+
+class TestGetAvgBurnRate:
+    def test_success(self):
+        assert business_logic.get_avg_burn_rate(120000, 12) == 10000

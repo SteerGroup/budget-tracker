@@ -12,3 +12,7 @@ def get_remaining_budget(amt_spent, total_budget, percent=False):
         return amt_remaining / total_budget
     else:
         return amt_remaining
+
+
+def get_avg_burn_rate(total_budget, periods):
+    return total_budget / periods
