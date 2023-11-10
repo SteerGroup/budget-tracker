@@ -1,9 +1,19 @@
+import pytest
 import business_logic
 
 
-def test_get_pct_budget_used():
-    assert business_logic.get_pct_budget_used(30000, 100000) == 0.3
-    assert business_logic.get_pct_budget_used(120000, 100000) == 1.2
+class TestGetPctBudgetUsed:
+    def test_success(self):
+        assert business_logic.get_pct_budget_used(30000, 100000) == 0.3
+        assert business_logic.get_pct_budget_used(120000, 100000) == 1.2
+
+    def test_zero_budget(self):
+        with pytest.raises(ValueError, match="Budget cannot be zero"):
+            business_logic.get_pct_budget_used(30000, 0)
+
+    def test_non_numeric_budget(self):
+        with pytest.raises(ValueError, match="Budget must be numeric"):
+            business_logic.get_pct_budget_used(30000, "X")
 
 
 def test_get_remaining_budget():

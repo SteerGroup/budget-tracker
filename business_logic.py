@@ -1,4 +1,8 @@
 def get_pct_budget_used(amt_spent, total_budget):
+    if total_budget == 0:
+        raise ValueError("Budget cannot be zero.")
+    if not isinstance(total_budget, int):
+        raise ValueError("Budget must be numeric.")
     return amt_spent / total_budget
 
 
