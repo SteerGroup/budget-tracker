@@ -1,0 +1,11 @@
+# Project template--should contain everything needed to define a project
+
+name: "project_name"
+code: "project_code"
+open: true # possible values: open, closed
+total_budget: 9999 # in dollars
+duration: 9999 # number of periods in chosen units
+staff: 9999 # number of staff
+staff_list:
+- Anthony: 175
+- Charles: 350
