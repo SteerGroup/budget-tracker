@@ -15,7 +15,9 @@
 
 ## Data Model
 
-CSV (or similar) or SQLite database
+- store record of tracked projects
+- structured data (YAML)--single file per project
+- information import via CSV and/or specific reports (from Agresso)
 
 ## Interface
 
@@ -26,5 +28,19 @@ start with command line, convert to web app later?
 - function to show percent of budget used
 - function to show budget remaining (either in value or percentage)
 - function to calculate average burn rate
-
 - function to show actual spend over timeline -- compare with plan
+- ability to change project status
+
+## To-do
+
+- think about data structure
+- implement Project class
+- clean up text output
+- units
+  - periods (allow user to specify days, weeks, months)
+  - units (assume dollars)
+- additional business logic
+  - margins
+  - tracking against plan
+  - staff
+- allow user to retrieve specific info
