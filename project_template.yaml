@@ -7,5 +7,5 @@ total_budget: 9999 # in dollars
 duration: 9999 # number of periods in chosen units
 staff: 9999 # number of staff
 staff_list:
-- Anthony: 175
-- Charles: 350
+ Anthony: 175
+ Charles: 350
