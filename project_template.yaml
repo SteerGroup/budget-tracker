@@ -4,8 +4,9 @@ name: "project_name"
 code: "project_code"
 open: true # possible values: open, closed
 total_budget: 9999 # in dollars
+amount_spent: 5000 # in dollars
 duration: 9999 # number of periods in chosen units
-staff: 9999 # number of staff
+staff_count: 9999 # number of staff
 staff_list:
  Anthony: 175
  Charles: 350
