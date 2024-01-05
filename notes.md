@@ -35,6 +35,11 @@ start with command line, convert to web app later?
 
 - think about data structure
 - implement Project class
+  - assign attribute values
+  - implement basic methods
+  - demonstrate private methods
+  - save project updates
+  - test Project class
 - clean up text output
 - units
   - periods (allow user to specify days, weeks, months)
