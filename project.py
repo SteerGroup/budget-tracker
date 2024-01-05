@@ -18,6 +18,20 @@ class Project:
             self.staff_count = project_yaml["staff_count"]
             self.staff_list = project_yaml["staff_list"]
 
+    def write_yaml(self):
+        project_dict = {
+            "name": self.name,
+            "code": self.code,
+            "open": self.open,
+            "total_budget": self.total_budget,
+            "amount_spent": self.amount_spent,
+            "duration": self.duration,
+            "staff_count": self.staff_count,
+            "staff_list": self.staff_list,
+        }
+        with open(self.yaml_path, "w") as file:
+            yaml.dump(project_dict, file)
+
     def get_avg_burn_rate(self):
         return self.total_budget / self.duration
 
