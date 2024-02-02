@@ -40,7 +40,8 @@ start with command line, convert to web app later?
   - demonstrate private methods
   - save project updates
   - test Project class
-- clean up text output
+- rework interface
+  - clean up text output
 - units
   - periods (allow user to specify days, weeks, months)
   - units (assume dollars)
@@ -48,4 +49,6 @@ start with command line, convert to web app later?
   - margins
   - tracking against plan
   - staff
+  - cost to complete
+- export project snapshot
 - allow user to retrieve specific info
