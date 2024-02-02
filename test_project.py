@@ -13,23 +13,26 @@ class TestGetPctBudgetUsed:
         test_project.amount_spent += 12000
         assert test_project.get_pct_budget_used() == 0.2
 
-    # def test_zero_budget(self, test_project):
-    #     with pytest.raises(ValueError, match="Budget cannot be zero"):
-    #         test_project.get_pct_budget_used(30000, 0)
+    def test_zero_budget(self, test_project):
+        test_project.total_budget = 0
+        with pytest.raises(ValueError, match="Budget cannot be zero"):
+            test_project.get_pct_budget_used()
 
-    # def test_non_numeric_budget(self, test_project):
-    #     with pytest.raises(ValueError, match="Budget must be numeric"):
-    #         test_project.get_pct_budget_used(30000, "X")
+    def test_non_numeric_budget(self, test_project):
+        test_project.total_budget = "Zero"
+        with pytest.raises(ValueError, match="Budget must be numeric"):
+            test_project.get_pct_budget_used()
 
 
-def test_get_remaining_budget(test_project):
-    assert test_project.get_remaining_budget() == 108000
-    assert test_project.get_remaining_budget(percent=True) == 0.9
-    # assert test_project.get_remaining_budget(120000, 100000) == -20000
-    # assert (
-    #     test_project.get_remaining_budget(120000, 100000, percent=True)
-    #     == -0.2
-    # )
+class TestGetRemainingBudget:
+    def test_positive(self, test_project):
+        assert test_project.get_remaining_budget() == 108000
+        assert test_project.get_remaining_budget(percent=True) == 0.9
+
+    def test_negative(self, test_project):
+        test_project.amount_spent = 150000
+        assert test_project.get_remaining_budget() == -30000
+        assert test_project.get_remaining_budget(percent=True) == -0.25
 
 
 class TestGetAvgBurnRate:
