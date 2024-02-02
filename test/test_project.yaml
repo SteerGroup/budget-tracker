@@ -1,0 +1,10 @@
+amount_spent: 12000
+code: 11111111
+duration: 3
+name: Project X
+open: true
+staff_count: 6
+staff_list:
+  Anthony: 175
+  Charles: 350
+total_budget: 120000

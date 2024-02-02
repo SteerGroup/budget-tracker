@@ -4,7 +4,7 @@ from project import Project
 
 @pytest.fixture
 def test_project():
-    return Project("test_project.yaml")
+    return Project("test/test_project.yaml")
 
 
 class TestGetPctBudgetUsed:
