@@ -1,16 +1,17 @@
-import business_logic as bl
+from project import Project
 
 print("Welcome to the Steer Budget Tracker.\n")
-project_name = input("Please enter the name of your project: ")
-total_budget = int(input("Please enter the total budget: "))
-periods = int(
-    input("Please enter the number of time periods for your project: ")
-)
-amt_spent = int(input("Please enter the budget spent to date: "))
 
-print(f"PROJECT SUMMARY REPORT: {project_name}")
-print(f"Total periods: {periods}")
-print(f"Average burn rate: {bl.get_avg_burn_rate(total_budget, periods)}")
-print(
-    f"Budget remaining: {bl.get_remaining_budget(amt_spent, total_budget)} of {total_budget}."
+project_YAML_path = input(
+    "Please enter the path to your project's YAML file: "
 )
+project = Project(project_YAML_path)
+
+print(f"PROJECT SUMMARY REPORT: {project.name}")
+print(f"Total periods: {project.duration}")
+print(f"Average burn rate: {project.get_avg_burn_rate()}")
+print(
+    f"Budget remaining: {project.get_remaining_budget()} "
+    f"of {project.total_budget}"
+)
+print(f"Percent remaining: {project.get_remaining_budget(percent=True)}")
