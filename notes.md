@@ -48,6 +48,11 @@ start with command line, convert to web app later?
 - additional business logic
   - margins
   - tracking against plan
+    - allow initial budget by staff/category as CSV
+    - store data in project YAML file
+    - update of actual spend can be done via CSV or in tracker interface
+    - if possible, allow flexible categorization (could be by staff or other category)
+    - enable aggregation in reporting if desired
   - staff
   - cost to complete
 - export project snapshot
