@@ -49,7 +49,7 @@ start with command line, convert to web app later?
   - margins
   - tracking against plan
     - allow initial budget by staff/category as CSV
-    - store data in project YAML file
+    - store data in SQLite database
     - update of actual spend can be done via CSV or in tracker interface
     - if possible, allow flexible categorization (could be by staff or other category)
     - enable aggregation in reporting if desired
@@ -57,3 +57,10 @@ start with command line, convert to web app later?
   - cost to complete
 - export project snapshot
 - allow user to retrieve specific info
+- could we replace YAML file with an alternative (or include in DB)?
+
+## Steps in budget definition/update
+
+- define CSV structure
+- implement CSV import logic
+- implement budget update logic (may be combined with above)
