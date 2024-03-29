@@ -1,10 +1,13 @@
+import csv
 import yaml
 
 
 class Project:
-    def __init__(self, yaml_path):
+    def __init__(self, yaml_path, budget_csv_path=None):
         self.yaml_path = yaml_path
         self.parse_yaml()
+        if budget_csv_path:
+            self.parse_budget_csv()
 
     def parse_yaml(self):
         with open(self.yaml_path, "r") as file:
@@ -31,6 +34,9 @@ class Project:
         }
         with open(self.yaml_path, "w") as file:
             yaml.dump(project_dict, file)
+
+    def parse_budget_csv(budget_csv_path):
+        pass
 
     def get_avg_burn_rate(self):
         return self.total_budget / self.duration
