@@ -64,3 +64,16 @@ start with command line, convert to web app later?
 - define CSV structure
 - implement CSV import logic
 - implement budget update logic (may be combined with above)
+- facilitate population of budget data using PID (or PSR)
+
+## Database functionality
+
+- create database
+- create project table
+- create budget_details table
+- add record to project table upon project creation
+- add records to budget_details table when budget data is supplied
+- query database
+- update records in all tables
+- remove projects (delete records)
+- copy project
