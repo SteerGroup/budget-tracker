@@ -13,8 +13,17 @@ def get_db_objects():
     return {"con": con, "cur": con.cursor()}
 
 
-def create_project_table():
-    pass
+def create_projects_table():
+    db_obj = get_db_objects()
+    db_obj["cur"].execute(
+        """
+        CREATE TABLE projects(
+            name TEXT,
+            code TEXT PRIMARY KEY,
+            open INTEGER
+        )
+        """
+    )
 
 
 def create_budget_details_table():
