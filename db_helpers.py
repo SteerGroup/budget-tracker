@@ -1,3 +1,4 @@
+import csv
 import sqlite3
 from pathlib import Path
 
@@ -50,5 +51,25 @@ def add_project(project):
         "INSERT INTO projects VALUES(?, ?, ?);",
         (project.name, project.code, project.open),
     )
+    db_obj["con"].commit()
+    db_obj["con"].close()
+
+
+def add_project_budget_details(project, budget_path):
+    db_obj = get_db_objects()
+    with open(budget_path, newline="") as budget_file:
+        reader = csv.DictReader(budget_file)
+        for row in reader:
+            db_obj["cur"].execute(
+                "INSERT INTO budget_details VALUES(?, ?, ?, ?, ?, ?);",
+                (
+                    project.code,
+                    row["period"],
+                    row["task"],
+                    row["staff"],
+                    row["planned_budget"],
+                    row["actual_budget"],
+                ),
+            )
     db_obj["con"].commit()
     db_obj["con"].close()
