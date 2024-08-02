@@ -33,7 +33,7 @@ def create_budget_details_table(db_cur):
     db_cur.execute(
         """
         CREATE TABLE IF NOT EXISTS budget_details(
-            project_name TEXT,
+            project_code TEXT,
             period INTEGER,
             task INTEGER,
             staff TEXT,
