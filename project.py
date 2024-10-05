@@ -44,8 +44,8 @@ class Project:
     def parse_budget_csv(self, budget_csv_path):
         db_helpers.add_project_budget_details(self, budget_csv_path)
 
-    # def get_avg_burn_rate(self):  # TODO: Update
-    #     return self.total_budget / self.duration
+    def get_avg_burn_rate(self):
+        return db_helpers.get_avg_burn_rate(self)
 
     # def get_pct_budget_used(self):  # TODO: Update
     #     if self.total_budget == 0:
@@ -54,9 +54,5 @@ class Project:
     #         raise ValueError("Budget must be numeric.")
     #     return self.amount_spent / self.total_budget
 
-    # def get_remaining_budget(self, percent=False):  # TODO: Update
-    #     amt_remaining = self.total_budget - self.amount_spent
-    #     if percent:
-    #         return amt_remaining / self.total_budget
-    #     else:
-    #         return amt_remaining
+    def get_remaining_budget(self, percent=False):
+        return db_helpers.get_remaining_budget(self, percent)

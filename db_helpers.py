@@ -46,6 +46,7 @@ def create_budget_details_table(db_cur):
 
 
 def add_project(project):
+    # TODO: add try except clause to catch unique value error
     db_obj = get_db_objects()
     db_obj["cur"].execute(
         "INSERT INTO projects VALUES(?, ?, ?);",
@@ -73,3 +74,46 @@ def add_project_budget_details(project, budget_path):
             )
     db_obj["con"].commit()
     db_obj["con"].close()
+
+
+def get_avg_burn_rate(project):
+    db_obj = get_db_objects()
+    burn_rate = (
+        db_obj["cur"]
+        .execute(
+            "SELECT SUM(planned_budget) / MAX(period) "
+            f"FROM budget_details WHERE project_code = '{project.code}';"
+        )
+        .fetchone()[0]
+    )
+    db_obj["con"].close()
+    return burn_rate
+
+
+def get_remaining_budget(project, percent):
+
+    db_obj = get_db_objects()
+
+    total_budget = (
+        db_obj["cur"]
+        .execute(
+            "SELECT SUM(planned_budget) "
+            f"FROM budget_details WHERE project_code = '{project.code}';"
+        )
+        .fetchone()[0]
+    )
+
+    if percent and total_budget == 0:
+        raise ValueError("Budget cannot be zero.")
+
+    remaining_budget = (
+        db_obj["cur"]
+        .execute(
+            "SELECT SUM(planned_budget) - SUM(actual_budget) "
+            f"FROM budget_details WHERE project_code = '{project.code}';"
+        )
+        .fetchone()[0]
+    )
+
+    db_obj["con"].close()
+    return remaining_budget / total_budget if percent else remaining_budget
