@@ -44,15 +44,58 @@ class Project:
     def parse_budget_csv(self, budget_csv_path):
         db_helpers.add_project_budget_details(self, budget_csv_path)
 
-    def get_avg_burn_rate(self):
-        return db_helpers.get_avg_burn_rate(self)
+    def total_budget(self):
+        db_obj = db_helpers.get_db_objects()
 
-    # def get_pct_budget_used(self):  # TODO: Update
-    #     if self.total_budget == 0:
-    #         raise ValueError("Budget cannot be zero.")
-    #     if not isinstance(self.total_budget, int):
-    #         raise ValueError("Budget must be numeric.")
-    #     return self.amount_spent / self.total_budget
+        total_budget = (
+            db_obj["cur"]
+            .execute(
+                "SELECT SUM(planned_budget) "
+                f"FROM budget_details WHERE project_code = '{self.code}';"
+            )
+            .fetchone()[0]
+        )
+        db_obj["con"].close()
+        return total_budget
 
-    def get_remaining_budget(self, percent=False):
-        return db_helpers.get_remaining_budget(self, percent)
+    def spent_budget(self):
+        db_obj = db_helpers.get_db_objects()
+        spent_budget = (
+            db_obj["cur"]
+            .execute(
+                "SELECT SUM(actual_budget) "
+                f"FROM budget_details WHERE project_code = '{self.code}';"
+            )
+            .fetchone()[0]
+        )
+        db_obj["con"].close()
+        return spent_budget
+
+    def duration(self):
+        db_obj = db_helpers.get_db_objects()
+        duration = (
+            db_obj["cur"]
+            .execute(
+                "SELECT MAX(period) "
+                f"FROM budget_details WHERE project_code = '{self.code}';"
+            )
+            .fetchone()[0]
+        )
+        db_obj["con"].close()
+        return duration
+
+    def planned_burn_rate(self):
+        return self.total_budget() / self.duration()
+
+    def percent_budget_used(self):
+        total_budget = self.total_budget()
+        if total_budget == 0:
+            raise ValueError("Budget cannot be zero.")
+        return self.spent_budget() / total_budget
+
+    def remaining_budget(self, percent=False):
+        total_budget = self.total_budget()
+        if total_budget == 0:
+            raise ValueError("Budget cannot be zero.")
+        remaining_budget = total_budget - self.spent_budget()
+        return remaining_budget / total_budget if percent else remaining_budget
