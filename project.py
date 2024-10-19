@@ -1,21 +1,45 @@
 import db_helpers
 
 
+class ProjectException(Exception):
+    pass
+
+
 class Project:
     def __init__(
         self,
-        name: str,
         code: str,
-        open: bool,
+        existing: bool = True,
+        name: str | None = None,
+        active: bool = True,
         budget_csv_path: str | None = None,
     ):
+        if code is None:
+            raise ValueError("No project code entered.")
         db_helpers.create_db()
-        self.name = name
-        self.code = code
-        self.open = open
-        self.add_project_to_db()
-        if budget_csv_path:
-            self.parse_budget_csv(budget_csv_path)
+        code_is_used = True
+        if existing:
+            # check that project code is in use
+            if not code_is_used:
+                raise ProjectException("Project not found.")
+            # TODO: complete
+        else:
+            # validate presence of name, active, budget_csv_path
+            if name is None:
+                raise ValueError("No project name entered.")
+            if budget_csv_path is None:
+                raise ValueError("No budget file provided.")
+            # check that project code is not in use
+            if code_is_used:
+                raise ProjectException(
+                    "Code is already used, please choose a unique code."
+                )
+            self.name = name
+            self.code = code
+            self.active = active
+            self.add_project_to_db()
+            if budget_csv_path:
+                self.parse_budget_csv(budget_csv_path)
 
     def add_project_to_db(
         self,
