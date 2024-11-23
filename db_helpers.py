@@ -19,6 +19,7 @@ def get_db_objects():
 
 
 def create_projects_table(db_cur):
+    # TODO: Change "open" to "active" later on
     db_cur.execute(
         """
         CREATE TABLE IF NOT EXISTS projects(
@@ -50,10 +51,35 @@ def add_project(project):
     db_obj = get_db_objects()
     db_obj["cur"].execute(
         "INSERT INTO projects VALUES(?, ?, ?);",
-        (project.name, project.code, project.open),
+        (project.name, project.code, project.active),
     )
     db_obj["con"].commit()
     db_obj["con"].close()
+
+
+def code_exists(code):
+    db_obj = get_db_objects()
+    code_count = (
+        db_obj["cur"]
+        .execute(f"SELECT COUNT(*) FROM projects WHERE code = '{code}';")
+        .fetchone()[0]
+    )
+    db_obj["con"].close()
+    return True if code_count > 0 else False
+
+
+def get_proj_info(project, label):
+    db_obj = get_db_objects()
+    value = (
+        db_obj["cur"]
+        .execute(
+            f"SELECT {label} "
+            f"FROM projects WHERE code = '{project.code}';"
+        )
+        .fetchone()[0]
+    )
+    db_obj["con"].close()
+    return value
 
 
 def add_project_budget_details(project, budget_path):

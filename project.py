@@ -16,13 +16,16 @@ class Project:
     ):
         if code is None:
             raise ValueError("No project code entered.")
+        self.code = code
         db_helpers.create_db()
-        code_is_used = True
+        code_is_used = db_helpers.code_exists(self.code)
         if existing:
             # check that project code is in use
             if not code_is_used:
                 raise ProjectException("Project not found.")
-            # TODO: complete
+            self.name = db_helpers.get_proj_info(self, "name")
+            # TODO: update open to "active" when we reset the db
+            self.active = db_helpers.get_proj_info(self, "open")
         else:
             # validate presence of name, active, budget_csv_path
             if name is None:
@@ -35,7 +38,6 @@ class Project:
                     "Code is already used, please choose a unique code."
                 )
             self.name = name
-            self.code = code
             self.active = active
             self.add_project_to_db()
             if budget_csv_path:
