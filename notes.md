@@ -2,8 +2,9 @@
 
 ## Core Functionality
 
-- input project, budget, timeline, staff names/rates (think about formats)
-- return used budget, remaining budget, burn rate
+- [x] Add functionality to access existing projects
+- [x] input project, budget, timeline, staff names/rates (think about formats)
+- [x] return used budget, remaining budget, burn rate
 - ability to input expected burn rates (task- or project-level)
 - create snapshots of project status on entry of new inputs
 - export table showing status at each point in time (visualize?)
@@ -15,8 +16,7 @@
 
 ## Data Model
 
-- store record of tracked projects
-- structured data (YAML)--single file per project
+- [x] store record of tracked projects
 - information import via CSV and/or specific reports (from Agresso)
 
 ## Interface
@@ -25,9 +25,9 @@ start with command line, convert to web app later?
 
 ## Business Logic
 
-- function to show percent of budget used
-- function to show budget remaining (either in value or percentage)
-- function to calculate average burn rate
+- [x] function to show percent of budget used
+- [x] function to show budget remaining (either in value or percentage)
+- [x] function to calculate average burn rate
 - function to show actual spend over timeline -- compare with plan
 - ability to change project status
 
@@ -57,23 +57,32 @@ start with command line, convert to web app later?
   - cost to complete
 - export project snapshot
 - allow user to retrieve specific info
-- could we replace YAML file with an alternative (or include in DB)?
 
 ## Steps in budget definition/update
 
-- define CSV structure
-- implement CSV import logic
+- [x] define CSV structure
+- [x] implement CSV import logic
 - implement budget update logic (may be combined with above)
 - facilitate population of budget data using PID (or PSR)
+- update budget details via Agresso reports
+  - think about logic for assigning hours to tasks
+- checking against previous data to identify changes (prompting user to accept)
 
 ## Database functionality
 
-- create database
-- create project table
-- create budget_details table
-- add record to project table upon project creation
-- add records to budget_details table when budget data is supplied
-- query database
-- update records in all tables
-- remove projects (delete records)
-- copy project
+- [x] create database
+- [x] create project table
+- [x] create budget_details table
+- [x] add record to project table upon project creation
+- [x] add records to budget_details table when budget data is supplied
+- [x] query database
+- [ ] add dates to DB records to facilitate project history (update queries
+  accordingly)
+- [ ] remove projects (delete records)
+- [ ] copy project
+
+## Next steps
+
+1. add timestamps to DB
+2. copy/remove projects
+3. implement Agresso report import
